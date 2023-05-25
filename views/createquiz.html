@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreateQuiz</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   
+</head>
+<body>
+    <form  class="form">
+
+    
+        <div class="header">
+        <label for="quizname">Enter the name of quiz:-</label>
+        <input type="text" name="quizname" id="quizname">
+        </div>
+
+        <hr>
+        <div class="question">
+    
+        <label for="question">Question</label>
+        <input type="text" name="question" id="question"><br>
+        <label for="optiona">A</label>
+        <input type="option" name="optiona" id="optiona"><br>
+        <label for="optionb">B</label>
+        <input type="option" name="optionb" id="optionb"><br>
+        <label for="optionc">C</label>
+        <input type="option" name="optionc" id="optionc"><br>
+        <label for="optiond">D</label>
+        <input type="option" name="optiond" id="optiond"><br>
+        <label for="answer">Answer</label>
+        <input type="option" name="answer" id="answer"><br>
+        <label for="difficulty">Set difficulty of question</label>
+        <input type="text" name="difficulty" id="difficulty">
+    </div>
+        <hr>
+
+
+           
+
+   
+    <button class="add-btn" type="button">Add Questions</button>
+   <input type="submit" value="submit">
+    <hr>
+
+</form>
+
+   
+</body>
+<script>
+    $(document).ready(function(){
+        console.log("hello world")
+        $('.add-btn').on('click',function(){
+      $(`<hr><div class="question">
+        <label for="question">Question</label>
+        <input type="text" name="question" id="question"><br>
+        <label for="optiona">A</label>
+        <input type="option" name="optiona" id="optiona"><br>
+        <label for="optionb">B</label>
+        <input type="option" name="optionb" id="optionb"><br>
+        <label for="optionc">C</label>
+        <input type="option" name="optionc" id="optionc"><br>
+        <label for="optiond">D</label>
+        <input type="option" name="optiond" id="optiond"><br>
+        <label for="answer">Answer</label>
+        <input type="option" name="answer" id="answer"><br>
+        <label for="difficulty">Set difficulty of question</label>
+        <input type="text" name="difficulty" id="difficulty">
+    </div> 
+        <hr>`).insertAfter('.question:last');
+    })
+    const formE1=document.querySelector('.form')
+    formE1.addEventListener('submit',()=>{
+
+        event.preventDefault();
+        const questions=document.querySelectorAll('.question')
+        
+        const formData=new FormData(formE1);
+       questions.forEach((item) => formData.append("questions[]",item))
+       
+        const data=Object.fromEntries(formData);
+        console.log(data)
+
+        fetch('https://localhost:8080/teacher/createquizz',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+
+    })
+
+   
+
+   
+})
+</script>
+</html>
