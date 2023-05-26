@@ -11,5 +11,6 @@ func init() {
 func main() {
 	
 	// dbconnection.DB.AutoMigrate(&models.User{}, &models.Role{})
+	dbconnection.DB.Migrator().DropTable(&models.Questions{},&models.Quiz{})
 	dbconnection.DB.AutoMigrate(&models.Questions{},&models.Quiz{})
 }

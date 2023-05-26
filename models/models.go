@@ -15,20 +15,20 @@ type Role struct {
 
 type Questions struct{
 	ID int `gorm:"primaryKey"`
-	Question string `json:"question" form:"question"`
-	OptionA  string `json:"optiona" form:"optiona"`
-	OptionB  string  `json:"optionb" form:"optionb"`
-	OptionC  string  `json:"optionc" form:"optionc"`
-	OptionD  string   `json:"optiond" form:"optiond"`
+	Question string `json:"question" form:"question" binding:"required"`
+	OptionA  string `json:"optiona" form:"optiona" binding:"required"`
+	OptionB  string  `json:"optionb" form:"optionb" binding:"required"`
+	OptionC  string  `json:"optionc" form:"optionc" binding:"required"`
+	OptionD  string   `json:"optiond" form:"optiond" binding:"required"`
 	Answer   string   `json:"answer" form:"answer"`
-	Difficulty string  `json:"difficulty" form:"difficulty"`
+	Difficulty string  `json:"difficulty" form:"difficulty" binding:"required"`
 	QuizId int         `json:"quizid" form:"quizid"`
 	Quiz Quiz `gorm:"foreignKey:QuizId;References:ID"`
 }
 
 type Quiz struct{
 	ID int `gorm:"primaryKey"`
-	QuizName string `json:"quizname" form:"quizname"`
+	QuizName string `json:"quizname" form:"quizname" binding:"required"	`
 	CreatorID int
 
 

@@ -9,10 +9,18 @@ import (
 	"quizz-application/dbconnection"
 	"quizz-application/models"
 
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 )
 
 func PostQuizController(c *gin.Context) {
+	session:=sessions.Default(c)
+	userid:=session.Get("userID")
+	var user models.User
+	dbconnection.DB.Where("id=?",userid).Find(&user)
+	if user.RoleName!="teacher"{
+		c.Redirect(401,"/authentication/login"	)
+	}
 	quizname :=c.Query("quizname")
 	fmt.Println(quizname)
 	fmt.Println("post request called")
