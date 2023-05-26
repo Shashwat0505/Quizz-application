@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CreateQuiz</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
    
 </head>
 <body>
@@ -14,26 +15,26 @@
     
         <div class="header">
         <label for="quizname">Enter the name of quiz:-</label>
-        <input type="text" name="quizname" id="quizname">
+        <input type="text" name="quizname" id="input_quiz_name" class="question">
         </div>
 
         <hr>
         <div class="question">
     
         <label for="question">Question</label>
-        <input type="text" name="question" id="question"><br>
+        <input type="text" name="question" id="question" class="question"><br>
         <label for="optiona">A</label>
-        <input type="option" name="optiona" id="optiona"><br>
+        <input type="option" name="optiona" id="optiona" class="question"><br>
         <label for="optionb">B</label>
-        <input type="option" name="optionb" id="optionb"><br>
+        <input type="option" name="optionb" id="optionb" class="question"><br>
         <label for="optionc">C</label>
-        <input type="option" name="optionc" id="optionc"><br>
+        <input type="option" name="optionc" id="optionc" class="question"><br>
         <label for="optiond">D</label>
-        <input type="option" name="optiond" id="optiond"><br>
+        <input type="option" name="optiond" id="optiond" class="question"><br>
         <label for="answer">Answer</label>
-        <input type="option" name="answer" id="answer"><br>
+        <input type="option" name="answer" id="answer" class="question"><br>
         <label for="difficulty">Set difficulty of question</label>
-        <input type="text" name="difficulty" id="difficulty">
+        <input type="text" name="difficulty" id="difficulty" class="question">
     </div>
         <hr>
 
@@ -55,44 +56,94 @@
         $('.add-btn').on('click',function(){
       $(`<hr><div class="question">
         <label for="question">Question</label>
-        <input type="text" name="question" id="question"><br>
+        <input type="text" name="question" id="question" class="question"><br>
         <label for="optiona">A</label>
-        <input type="option" name="optiona" id="optiona"><br>
+        <input type="text" name="optiona" id="optiona" class="question data"><br>
         <label for="optionb">B</label>
-        <input type="option" name="optionb" id="optionb"><br>
+        <input type="text" name="optionb" id="optionb" class="question data"><br>
         <label for="optionc">C</label>
-        <input type="option" name="optionc" id="optionc"><br>
+        <input type="text" name="optionc" id="optionc" class="question data"><br>
         <label for="optiond">D</label>
-        <input type="option" name="optiond" id="optiond"><br>
+        <input type="text" name="optiond" id="optiond" class="question data"><br>
         <label for="answer">Answer</label>
-        <input type="option" name="answer" id="answer"><br>
+        <input type="text" name="answer" id="answer" class="question data"><br>
         <label for="difficulty">Set difficulty of question</label>
-        <input type="text" name="difficulty" id="difficulty">
+        <input type="text" name="difficulty" id="difficulty" class="question">
     </div> 
         <hr>`).insertAfter('.question:last');
     })
     const formE1=document.querySelector('.form')
     formE1.addEventListener('submit',()=>{
-
         event.preventDefault();
-        const questions=document.querySelectorAll('.question')
-        
-        const formData=new FormData(formE1);
-       questions.forEach((item) => formData.append("questions[]",item))
+
+        console.log("button clicked")
+        let questions=document.getElementsByClassName('question')
+        let data=[].map.call(questions,function(e){
+            return e
+        });
        
-        const data=Object.fromEntries(formData);
         console.log(data)
 
-        fetch('https://localhost:8080/teacher/createquizz',{
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body: JSON.stringify(data)
+        let jarr=[]
+        var obj={}
+    
+        data.forEach(element=>{
+            
+            if (element.id=="question"){
+                obj={}
+                obj[element.id]=element.value
+                console.log(element.class)
+            }
+            else if (element.id=="difficulty"){
+                obj[element.id]=element.value
+                jarr.push(obj)
+                console.log(element.id)
+            }
+            else if(element.id.indexOf("option") != -1){
+                console.log("I found something")
+                obj[element.id]=element.value
+            }
+        
+           
         })
+        console.log(jarr)
+        // let newarr=[]
+        // data.forEach(element => {
+        //     let ques=new Map();
+        //     ques.set(element.id,element.value)
+        //     newarr.push(ques)
+        // });
+        // console.log(newarr)
+        
+        // let ansarr=[]
+        //     newarr.forEach(element=>{
+        //         let json=JSON.stringify(Object.fromEntries(element))
+        //         ansarr.push(json)
 
+        //     })
+        // console.log(ansarr)
+        
+
+
+       
+    
+        // console.log(ans)
+        // console.log(anss)
+
+        // console.log(data);
+       $.ajax({
+        url:"http://localhost:8080/teacher/createquizz?quizname="+$("#input_quiz_name").val(),
+        type:'POST',
+        contentType:'application/json',
+        dataType:'json',
+        data:JSON.stringify(jarr)
+
+       });
+        
     })
-
+    
+    
+    
    
 
    
