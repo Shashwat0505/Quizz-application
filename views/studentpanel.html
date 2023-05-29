@@ -1,7 +1,28 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <h1>welcome {{.name}}</h1>
+
 
 {{range .data}}
 
 <input type="button" value="{{.QuizName}}" id="{{.QuizName}}">
 
 {{end}} 
+
+<script>
+     $(document).on('click','input[id]',function(e){
+        var quizname=$(this).attr('id');
+        console.log(quizname)
+        console.log(typeof(quizname))
+        
+        myfunction(quizname)
+
+       });
+       function myfunction(s){
+        console.log(s)
+        var urlLink="http://localhost:8080/student/quiz?quizname="+s
+        window.open(urlLink)
+
+    }   
+
+
+</script>

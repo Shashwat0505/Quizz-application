@@ -1,0 +1,34 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+{{range .questions}}
+
+<h3>question:-{{.Question}}</h1>
+<h4>(A){{.OptionA}}</h4>
+<h4>(B){{.OptionB}}</h4>
+<h4>(C){{.OptionC}}</h4>
+<h4>(D){{.OptionD}}</h4>
+
+
+<hr>
+
+
+
+
+
+
+{{end}}
+
+<script>
+    $(document).ready(async function(){
+        console.log("document loaded")
+
+        const response=await fetch('http://localhost:8080/student/quiz-data');
+        const data=await response.json();
+        console.log(await data);
+        console.log("Heelooo")
+
+    })
+
+
+</script>
