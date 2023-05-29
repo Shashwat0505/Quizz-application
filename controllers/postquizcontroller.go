@@ -43,6 +43,7 @@ func PostQuizController(c *gin.Context) {
 	fmt.Println(questions)
 	q := models.Quiz{
 		QuizName: quizname,
+		CreatorID: userid.(int),
 	}
 
 	dbconnection.DB.Create(&q)

@@ -50,4 +50,12 @@ func PostLoginDataController(c *gin.Context) {
 		return
 	}
 
+	if newuser.RoleName=="student"{
+		session.Set("userID",newuser.ID)
+		session.Save()
+		c.Redirect(301,"/student/studentpanel")
+		return
+
+	}
+
 }

@@ -33,3 +33,9 @@ type Quiz struct{
 
 
 }
+
+type Teacher_Student struct{
+	TeacherID int `gorm:"primaryKey"`
+	StudentID int `gorm:"primaryKey"`
+
+}

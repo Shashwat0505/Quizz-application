@@ -1,0 +1,19 @@
+<h1>Quiz Name:-{{.name}}</h1>
+<hr>
+{{range .questions}}
+
+<h3>question:-{{.Question}}</h1>
+<h4>(A){{.OptionA}}</h4>
+<h4>(B){{.OptionB}}</h4>
+<h4>(C){{.OptionC}}</h4>
+<h4>(D){{.OptionD}}</h4>
+<h4>Answer:-{{.Answer}}</h4>
+<h4>DIfficulty:-{{.Difficulty}}</h4>
+<hr>
+
+
+
+
+
+
+{{end}}

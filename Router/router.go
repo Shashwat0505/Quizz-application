@@ -41,6 +41,15 @@ func Run() {
 		Teacher.GET("/teacherpanel", controllers.TeacherPanelController)
 		Teacher.GET("/createquizz", controllers.CreateQuizController)
 		Teacher.POST("/createquizz",controllers.PostQuizController)
+		Teacher.GET("/addstudent", controllers.AddStudentController)
+		Teacher.POST("/addstudent", controllers.PostStudentController)
+		Teacher.GET("/listofquiz", controllers.GetListOfQuizController)
+		Teacher.GET("/quiz",controllers.GetQuizController)
+	}
+	Student := r.Group("/student")
+	{
+		Student.GET("/studentpanel", controllers.StudentPanelController)
+
 	}
 
 	r.Run(":8080")
