@@ -1,34 +1,267 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <title>Quiz App</title>
+
+</head>
+<style>
+   *, *::before, *::after {
+  box-sizing: border-box;
+  font-family: Gotham Rounded;
+}
+
+:root {
+  --hue-neutral: 200;
+  --hue-wrong: 0;
+  --hue-correct: 145;
+}
+
+body {
+  --hue: var(--hue-neutral);
+  padding: 0;
+  margin: 0;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: hsl(var(--hue), 100%, 20%);
+}
+
+body.correct {
+  --hue: var(--hue-correct);
+}
+
+body.wrong {
+  --hue: var(--hue-wrong);
+}
+
+.container {
+  width: 800px;
+  max-width: 80%;
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 0 10px 2px;
+}
+
+.btn-grid {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.btn {
+  --hue: var(--hue-neutral);
+  border: 1px solid hsl(var(--hue), 100%, 30%);
+  background-color: hsl(var(--hue), 100%, 50%);
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: white;
+  outline: none;
+}
+
+.btn:hover {
+  border-color: black;
+}
+
+.btn.correct {
+  --hue: var(--hue-correct);
+  color: black;
+}
+
+.btn.wrong {
+  --hue: var(--hue-wrong);
+}
+
+.start-btn, .next-btn {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 10px 20px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hide {
+  display: none;
+}
+</style>
+<body>
+    <div class="container">
+        <div id="question-container" class="hide">
+          <div id="question">Question</div>
+          <div id="answer-buttons" class="btn-grid">
+            <button class="btn">Answer 1</button>
+            <button class="btn">Answer 2</button>
+            <button class="btn">Answer 3</button>
+            <button class="btn">Answer 4</button>
+          </div>
+        </div>
+        <div class="controls">
+          <button id="start-btn" class="start-btn btn">Start</button>
+          <button id="next-btn" class="next-btn btn hide">Next</button>
+        </div>
+      </div>
+    
+</body>
+</html>
 
 
-{{range .questions}}
-
-<h3>question:-{{.Question}}</h1>
-<h4>(A){{.OptionA}}</h4>
-<h4>(B){{.OptionB}}</h4>
-<h4>(C){{.OptionC}}</h4>
-<h4>(D){{.OptionD}}</h4>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 
 
-<hr>
-
-
-
-
-
-
-{{end}}
 
 <script>
+    let questions
     $(document).ready(async function(){
         console.log("document loaded")
 
         const response=await fetch('http://localhost:8080/student/quiz-data');
         const data=await response.json();
         console.log(await data);
-        console.log("Heelooo")
+        // console.log("Heelooo")
+        questions=await data
+        console.log(questions)
+
 
     })
 
+    var count=0
+    const startButton=document.getElementById('start-btn')
+    const nextButton=document.getElementById('next-btn')
+
+    const questionContainerElement=document.getElementById('question-container')
+    const questionElement=document.getElementById('question')
+    const answerButtonsElement=document.getElementById('answer-buttons')
+    let shuffledQuestions,currentQuestionIndex
+    startButton.addEventListener('click',startGame)
+    nextButton.addEventListener('click',()=>{
+        currentQuestionIndex++
+        setNextQuestion()
+    })
+    
+
+    function startGame(){
+        console.log("button clicked")
+        startButton.classList.add('hide')
+        shuffledQuestions=questions.sort(()=>Math.random()-.5)
+        currentQuestionIndex=0
+        questionContainerElement.classList.remove('hide')
+        setNextQuestion()
+    }
+    function setNextQuestion(){
+        resetState()
+        showQuestion(shuffledQuestions[currentQuestionIndex])
+
+    }
+    function showQuestion(question){
+        questionElement.innerText=question.question
+        let ans=[question.optiona,question.optionb,question.optionc,question.optiond,question.answer]
+        createOption(ans)
+        // const optionA=document.createElement('button')
+        
+        // optionA.innerText=question.optiona
+        // console.log(optionA.innerText)
+        // optionA.classList.add('btn')
+        // answerButtonsElement.appendChild(optionA)
+
+        // const optionB=document.createElement('button')
+        
+        // optionB.innerText=question.optionb
+        // console.log(optionB.innerText)
+        // optionB.classList.add('btn')
+        // answerButtonsElement.appendChild(optionB)
+
+        // const optionC=document.createElement('button')
+        
+        // optionC.innerText=question.optionc
+        // console.log(optionC.innerText)
+        // optionC.classList.add('btn')
+        // answerButtonsElement.appendChild(optionC)
+
+        // const optionD=document.createElement('button')
+        
+        // optionD.innerText=question.optiond
+        // console.log(optionD.innerText)
+        // optionD.classList.add('btn')
+        // answerButtonsElement.appendChild(optionD)
+        
+
+    }
+    function createOption(answers){
+
+        for(let i=0;i<=3;i++){
+            const button=document.createElement('button')
+            button.innerText=answers[i]
+            button.classList.add('btn')
+            if(answers[i]===answers[4]){
+                button.dataset.correct=true
+            }
+            else{
+                button.dataset.correct=false
+            }
+            button.addEventListener('click',selectAnswer)
+            answerButtonsElement.appendChild(button)
+        }
+        
+            
+            
+        
+    }
+    function resetState(){
+        clearStatusClass(document.body)
+        nextButton.classList.add('hide')
+        while(answerButtonsElement.firstChild){
+            answerButtonsElement.removeChild
+            (answerButtonsElement.firstChild)
+        }
+    }
+
+    function selectAnswer(e){
+        const selectedButton=e.target
+        const correct=selectedButton.dataset.correct
+        setStatusClass(document.body, correct)  
+        Array.from(answerButtonsElement.children).forEach(button=>{
+            // console.log(button.textContent,button.dataset.correct)
+            setStatusClass(button,button.dataset.correct)
+        })
+        if(shuffledQuestions.length>currentQuestionIndex+1){
+            nextButton.classList.remove('hide')
+        }else{
+            startButton.innerText='Restart'
+            startButton.classList.remove('hide')
+        }
+        
+    }
+
+    function setStatusClass(element,correct){
+    
+        clearStatusClass(element)
+        console.log(correct)
+        // console.log(element,correct)
+        if (correct=="true") {
+            counter++
+            element.classList.add('correct')
+            console.log(element)
+        }else{
+            element.classList.add('wrong')
+            console.log(element)
+        }
+
+    }
+    function clearStatusClass(element){
+        element.classList.remove('correct')
+        element.classList.remove('wrong')
+    }
 
 </script>

@@ -28,7 +28,7 @@ func GetStudentQuizController(c *gin.Context) {
 func GetStudentQuizDataController(c *gin.Context) {
 	
 	var questions []models.Questions
-	dbconnection.DB.Debug().Model(&models.Quiz{}).Select("questions.question,questions.option_a,questions.option_b,questions.option_c,questions.option_d").Joins("inner join questions on questions.quiz_id=quizzes.id").Where("quizzes.quiz_name=?", quizname).Scan(&questions)
+	dbconnection.DB.Debug().Model(&models.Quiz{}).Select("questions.question,questions.option_a,questions.option_b,questions.option_c,questions.option_d,questions.answer").Joins("inner join questions on questions.quiz_id=quizzes.id").Where("quizzes.quiz_name=?", quizname).Scan(&questions)
 	fmt.Println(questions)
 	// j, _ := json.Marshal(questions)
 	// fmt.Println(string(j))
