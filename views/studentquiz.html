@@ -116,6 +116,10 @@ body.wrong {
           <button id="next-btn" class="next-btn btn hide">Next</button>
           <button id="submit-btn" class="submit-btn btn hide">Submit</button>
         </div>
+        <div class="result">
+            <h3 id="title" class="hide">Your score is:-</h3>
+            <h3 id="resultscore" class="resultscore hide"></h3>
+        </div>
       </div>
     
 </body>
@@ -151,6 +155,8 @@ body.wrong {
     const startButton=document.getElementById('start-btn')
     const nextButton=document.getElementById('next-btn')
     const submitButton=document.getElementById('submit-btn')
+    const resultscore=document.getElementById('resultscore')
+    const title=document.getElementById('title')
 
     const questionContainerElement=document.getElementById('question-container')
     const questionElement=document.getElementById('question')
@@ -182,6 +188,14 @@ body.wrong {
         console.log(QuestionObjArr)
         console.log(QuestionObj)
         console.log(QuizObject)
+        questionContainerElement.classList.add("hide")
+        submitButton.classList.add("hide")
+        title.classList.remove("hide")
+        resultscore.classList.remove("hide")
+        resultscore.innerText=counter
+
+        
+
         
 
     })
