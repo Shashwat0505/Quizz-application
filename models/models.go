@@ -41,11 +41,11 @@ type Teacher_Student struct{
 }
 
 type Quiz_Student struct{
-	ID int 
+	ID int `gorm:"autoIncrement"`
 	QuizName string `gorm:"primaryKey" json:"quizname"`
 	StudentID int 	`gorm:"primaryKey" json:"studentid"`
-	TotalScore int `json:"total_score"`
-	Result []string  `gorm:"type:text" json:"result"`
+	TotalScore string `json:"total_score"`
+	Result string  `gorm:"type:text" json:"result"`
 
 }
 

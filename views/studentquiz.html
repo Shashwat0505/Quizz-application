@@ -119,8 +119,8 @@ table,th,td{
           <button id="submit-btn" class="submit-btn btn hide">Submit</button>
         </div>
         <div class="result">
-            <h3 id="title" class="hide">Your score is:-</h3>
-            <h3 id="resultscore" class="resultscore hide"></h3>
+            <h3 id="title" class="hide"></h3>
+            <h3 id="resultscore" class="resultscore hide">Your score:-</h3>
         
             
               <table class="hide">
@@ -206,7 +206,7 @@ table,th,td{
         })
         QuizObject["quizname"]=quizname
         QuizObject["result"]=QuestionObjArr
-        QuizObject["total_score"]=counter
+        QuizObject["total_score"]=counter.toString();
         
         console.log(QuestionObjArr)
         console.log(QuestionObj)
@@ -214,11 +214,24 @@ table,th,td{
         questionContainerElement.classList.add("hide")
         submitButton.classList.add("hide")
         title.classList.remove("hide")
+       
         resultscore.classList.remove("hide")
-        resultscore.innerText=counter
+        resultscore.innerText+=counter.toString()+"/"+QuestionObjArr.length.toString()
+
 
         AppendBlock(QuestionObjArr)
         // ShowDetailedResult(QuestionObjArr)
+        
+        
+
+        $.ajax({
+          url:"http://localhost:8080/student/submit",
+          type:"POST",
+          contentType:'application/json',
+          dataType:'json',
+          data:JSON.stringify(QuizObject)
+
+        });
 
         
 
