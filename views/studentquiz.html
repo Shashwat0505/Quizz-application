@@ -117,6 +117,7 @@ table,th,td{
           <button id="start-btn" class="start-btn btn">Start</button>
           <button id="next-btn" class="next-btn btn hide">Next</button>
           <button id="submit-btn" class="submit-btn btn hide">Submit</button>
+          
         </div>
         <div class="result">
             <h3 id="title" class="hide"></h3>
@@ -142,8 +143,12 @@ table,th,td{
       
            
         </div>
+        
+        
+       
       </div>
-    
+
+      
 </body>
 </html>
 
@@ -179,7 +184,7 @@ table,th,td{
     const submitButton=document.getElementById('submit-btn')
     const resultscore=document.getElementById('resultscore')
     const title=document.getElementById('title')
-    
+    // const homeButton=document.getElementById('home-btn')
 
     const questionContainerElement=document.getElementById('question-container')
     const questionElement=document.getElementById('question')
@@ -194,6 +199,7 @@ table,th,td{
         setNextQuestion()
     })
     submitButton.addEventListener('click',()=>{
+      // homeButton.classList.remove('hide')
         let counter=0
         
         QuestionObjArr.push(QuestionObj)
@@ -222,7 +228,7 @@ table,th,td{
         AppendBlock(QuestionObjArr)
         // ShowDetailedResult(QuestionObjArr)
         
-        
+       
 
         $.ajax({
           url:"http://localhost:8080/student/submit",
@@ -387,6 +393,7 @@ table,th,td{
         let str7=`</td>
                 </tr>
               </table><br><br><br>`
+              
             let ans=str1+str2+str3+str4+str5+str6+str7
             $(".container").append(ans)
         // $(".container").append(`<table>
@@ -410,6 +417,10 @@ table,th,td{
         //       $("#selectedAnswer").html(arr[i].selected)
         //       $("correctAnswer").html(arr[i].answer)
       }
+      let str8 = `<a href="http://localhost:8080/student/studentpanel">
+      <button id="home-btn" class="home-btn btn">home</button>
+     </a>`
+     $(".container").append(str8)
     }
 
     // function ShowDetailedResult(result){
