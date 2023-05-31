@@ -24,6 +24,7 @@ func Run() {
 		Authentication.POST("/PostRegistration", controllers.PostRegistrationDataController)
 		Authentication.GET("/Login", controllers.LoginController)
 		Authentication.POST("/Login", controllers.PostLoginDataController)
+		Authentication.GET("/Logout",controllers.LogOutController)
 	}
 
 	Admin := r.Group("/admin")
@@ -52,6 +53,7 @@ func Run() {
 		Student.GET("/quiz", controllers.GetStudentQuizController)
 		Student.GET("/quiz-data", controllers.GetStudentQuizDataController)
 		Student.POST("/submit",controllers.SubmitQuizController)
+		Student.GET("/resultdashboard",controllers.ResultDashboardController)
 	}
 	// CORS for https://foo.com and https://github.com origins, allowing:
 	// - PUT and PATCH methods

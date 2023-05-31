@@ -22,11 +22,13 @@ func StudentPanelController(c *gin.Context) {
 		return
 	}
 	var quizzes []models.Quiz
+	var name string
 
 	dbconnection.DB.Model(&models.Teacher_Student{}).Select("quizzes.quiz_name").Joins("inner join quizzes on quizzes.creator_id=teacher_students.teacher_id ").Where("teacher_students.student_id=?", userid).Scan(&quizzes)
 	fmt.Println(quizzes)
-
+	dbconnection.DB.Model(&models.User{}).Select("name").Where("id=?",userid).Scan(&name)
 	c.HTML(200, "studentpanel.html", gin.H{
 		"data":quizzes,
+		"name":name,
 	})
 }
