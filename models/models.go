@@ -39,3 +39,21 @@ type Teacher_Student struct{
 	StudentID int `gorm:"primaryKey"`
 
 }
+
+type Quiz_Student struct{
+	ID int 
+	QuizName string `gorm:"primaryKey" json:"quizname"`
+	StudentID int 	`gorm:"primaryKey" json:"studentid"`
+	TotalScore int `json:"total_score"`
+	Result []string  `gorm:"type:text" json:"result"`
+
+}
+
+type Result struct{
+	ID int 	`gorm:"primaryKey"`
+	Question string `json:"question"`
+	Answer string `json:"answer"`
+	SelectedAnswer string `json:"selected"`
+	status string 	`json:"status"`
+
+}

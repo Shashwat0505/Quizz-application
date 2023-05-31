@@ -71,7 +71,9 @@ body.wrong {
 .btn:hover {
   border-color: black;
 }
-
+table,th,td{
+  border: 1px solid black;
+}
 .btn.correct {
   --hue: var(--hue-correct);
   color: black;
@@ -119,6 +121,26 @@ body.wrong {
         <div class="result">
             <h3 id="title" class="hide">Your score is:-</h3>
             <h3 id="resultscore" class="resultscore hide"></h3>
+        
+            
+              <table class="hide">
+                <tr rowspan="2">
+                  <th>Question</th>
+                  <td id="questioname"></td>
+                </tr>
+                
+                <tr>
+                <th>Expected Answers</th>
+                <th>Correct Anwers</th>
+                </tr>
+                <tr>
+                  <td id="#selectedAnswer"></td>
+                  <td id="#correctAnswer"></td>
+                </tr>
+              </table>
+              
+      
+           
         </div>
       </div>
     
@@ -157,6 +179,7 @@ body.wrong {
     const submitButton=document.getElementById('submit-btn')
     const resultscore=document.getElementById('resultscore')
     const title=document.getElementById('title')
+    
 
     const questionContainerElement=document.getElementById('question-container')
     const questionElement=document.getElementById('question')
@@ -194,7 +217,8 @@ body.wrong {
         resultscore.classList.remove("hide")
         resultscore.innerText=counter
 
-        
+        AppendBlock(QuestionObjArr)
+        // ShowDetailedResult(QuestionObjArr)
 
         
 
@@ -324,5 +348,66 @@ body.wrong {
         element.classList.remove('correct')
         element.classList.remove('wrong')
     }
+    function AppendBlock(arr){
+      for(let i=0;i<arr.length;i++){
+        let str1=`<table>
+                <tr>
+                  <th colspan="2">Question</th>
+                  
+                </tr>
+                <tr>
+                  <td colspan="2" id="questionname">`
+        let str2=arr[i].question
+        let str3=`</td>
+                </tr>
+                <tr>
+                <th>Selected Answer</th>
+                <th>Correct Anwer</th>
+                </tr>
+                <tr>
+                  <td id="#selectedAnswer">`
+        let str4=arr[i].selected
+        let str5=`</td>
+                  <td id="#correctAnswer">`
+
+        let str6=arr[i].answer
+        let str7=`</td>
+                </tr>
+              </table><br><br><br>`
+            let ans=str1+str2+str3+str4+str5+str6+str7
+            $(".container").append(ans)
+        // $(".container").append(`<table>
+        //         <tr>
+        //           <th colspan="2">Question</th>
+                  
+        //         </tr>
+        //         <tr>
+        //           <td colspan="2" id="questionname">q</td>
+        //         </tr>
+        //         <tr>
+        //         <th>Selected Answer</th>
+        //         <th>Correct Anwer</th>
+        //         </tr>
+        //         <tr>
+        //           <td id="#selectedAnswer">sa</td>
+        //           <td id="#correctAnswer">ca</td>
+        //         </tr>
+        //       </table><br><br><br>`)
+        //       $("#questionname").html(arr[i].question)
+        //       $("#selectedAnswer").html(arr[i].selected)
+        //       $("correctAnswer").html(arr[i].answer)
+      }
+    }
+
+    // function ShowDetailedResult(result){
+    //   console.log("show result called")
+    //   result.forEach(resultObj=>{
+    //     console.log(resultObj.question)
+    //     $("#questionname").html(resultObj.question)
+    //     $('#selectedAnswer').html(resultObj.selected)
+    //     $('#correctAnswer').html(resultObj.answer)
+
+    //   })
+    // }
 
 </script>
