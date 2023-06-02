@@ -38,12 +38,14 @@
 </head>
 
 <body>
+    <div class="navbar">
     <ul>
-        <li><a class="active" href="    http://localhost:8080/teacher/teacherpanel">Home</a></li>
+        <li><a class="active" href="http://localhost:8080/teacher/teacherpanel">Home</a></li>
        
         <li><a href="http://localhost:8080/teacher/teacherpanel">Back</a></li>
         <li><a href="http://localhost:8080/authentication/Logout">Logout</a></li>
     </ul>
+</div>
     <form class="form">
 
 
@@ -85,11 +87,11 @@
         </tr>
         <tr>
         <td><label for="difficulty">Set difficulty of question:-</label></td>
-        <td><input type ="radio" name="difficulty0" value="easy" class="difficulty question" id="difficulty"><label for="easy">easy</label><input type ="radio" name="difficulty" value="medium" class="difficulty question" id="difficulty"><label for="medium">medium</label><input type ="radio" name="difficulty" value="hard" class="difficulty question" id="difficulty"><label for="hard">hard</label></td>
+        <td><input type ="radio" name="difficulty0" value="easy" class="difficulty question" id="difficulty"><label for="easy">easy</label><input type ="radio" name="difficulty0" value="medium" class="difficulty question" id="difficulty"><label for="medium">medium</label><input type ="radio" name="difficulty0" value="hard" class="difficulty question" id="difficulty"><label for="hard">hard</label></td>
         </tr>
         </table>
     </div>
-        <hr id="lasthr">    
+        <hr id="lasthr0">    
 
 
 
@@ -104,7 +106,7 @@
 </body>
 <script>
     $(document).ready(function () {
-        let i=1
+        let i=0
         console.log("hello world")
         $('.add-btn').on('click', function () {
             i++
@@ -142,13 +144,13 @@
         </tr>
         <tr>
         <td><label for="difficulty">Set difficulty of question:-</label></td>
-        <td><input type ="radio" name="difficulty`+i+`" value="easy" class="difficulty question" id="difficulty"><label for="easy">easy</label><input type ="radio" name="difficulty" value="medium" class="difficulty question" id="difficulty"><label for="medium">medium</label><input type ="radio" name="difficulty" value="hard" class="difficulty question" id="difficulty"><label for="hard">hard</label></td>
+        <td><input type ="radio" name="difficulty`+i+`" value="easy" class="difficulty question" id="difficulty"><label for="easy">easy</label><input type ="radio" name="difficulty`+i+`" value="medium" class="difficulty question" id="difficulty"><label for="medium">medium</label><input type ="radio" name="difficulty`+i+`" value="hard" class="difficulty question" id="difficulty"><label for="hard">hard</label></td>
         </tr>
         </table>
     </div>
-        <hr id="lasthr">   
+        <hr id="lasthr`+i+`">   
 
-`).insertAfter('#lasthr:last');
+`).insertAfter(`    #lasthr`+(i-1));
         })
         const formE1 = document.querySelector('.form')
         formE1.addEventListener('submit', () => {
@@ -226,6 +228,8 @@
                 data: JSON.stringify(jarr)
 
             });
+            alert("quiz created successfully!!!")
+            window.open("http://localhost:8080/teacher/teacherpanel")
 
         })
 

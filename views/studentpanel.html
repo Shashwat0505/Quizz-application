@@ -116,7 +116,7 @@ li a:hover {
   </head>
   <body>
     <ul>
-        <li><a class="active" href="">Home</a></li>
+        <li><a class="active" href="http://localhost:8080/student/studentpanel">Home</a></li>
         <li><a href="http://localhost:8080/student/resultdashboard">Result Dashboard</a></li>
         <li><a href="http://localhost:8080/authentication/Logout">Back</a></li>
         <li><a href="http://localhost:8080/authentication/Logout">Logout</a></li>
@@ -130,7 +130,7 @@ li a:hover {
 
 {{range .data}}
 
-<input type="button" value="{{.QuizName}}" id="{{.QuizName}}" class="btn btn-primary btn-lg">
+<input type="button" value="{{.QuizName}}" id="{{.QuizName}}" class="btn btn-outline-primary">
 
 {{end}} 
 <h1>{{.error}}</h1>
