@@ -27,13 +27,16 @@ func Run() {
 		Authentication.GET("/Logout",controllers.LogOutController)
 	}
 
-	Admin := r.Group("/admin")
+	Admin := r.Group("/admin",SessionHandler)
 	{
 		Admin.GET("/adminpanel", controllers.AdminpanelController)
 		Admin.GET("/addteacher", controllers.AddTeacherController)
 		Admin.GET("/addadmin", controllers.AddAdminController)
 		Admin.POST("/addteacher", controllers.CreateTeacherController)
 		Admin.POST("/addadmin", controllers.CreateAdminController)
+		Admin.GET("/showquizzes",controllers.GetAdminQuizController)
+		Admin.GET("/quiz",controllers.RemoveQuizController)
+		
 
 	}
 
@@ -48,7 +51,7 @@ func Run() {
 		Teacher.GET("/quiz", controllers.GetQuizController)
 		Teacher.GET("/showstudentresult",controllers.GetStudentResultController)
 	}
-	Student := r.Group("/student")
+	Student := r.Group("/student",SessionHandler)
 	{
 		Student.GET("/studentpanel", controllers.StudentPanelController)
 		Student.GET("/quiz", controllers.GetStudentQuizController)
