@@ -10,10 +10,12 @@ import (
 )
 
 func PostRegistrationDataController(c *gin.Context) {
+	fmt.Println("post registration controller called")
 	var user models.User
 
 	c.ShouldBind(&user)
 
+	fmt.Println(user)
 
 	if user.Name==""||user.Email==""||user.Password==""{
 		c.HTML(301, "registration.html",gin.H{

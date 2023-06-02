@@ -1,7 +1,10 @@
 <html>
-
-<style>
-    ul {
+<head>
+    <style>
+        table,tr,td,th{
+            border: 1px solid black;
+        }
+        ul {
             list-style-type: none;
             margin: 0%;
             padding: 0;
@@ -24,33 +27,32 @@
         li a:hover {
             background-color: #0f0627;
         }
-</style>
+    </style>
+</head>
 <body>
-    
     <ul>
         <li><a class="active" href="http://localhost:8080/teacher/teacherpanel">Home</a></li>
        
-        <li><a href="http://localhost:8080/teacher/listofquiz">Back</a></li>
+        <li><a href="http://localhost:8080/teacher/teacherpanel">Back</a></li>
         <li><a href="http://localhost:8080/authentication/Logout">Logout</a></li>
     </ul>
-<h1>Quiz Name:-{{.name}}</h1>
-<hr>
-{{range .questions}}
+    
 
-<h3>question:-{{.Question}}</h1>
-<h4>(A){{.OptionA}}</h4>
-<h4>(B){{.OptionB}}</h4>
-<h4>(C){{.OptionC}}</h4>
-<h4>(D){{.OptionD}}</h4>
-<h4>Answer:-{{.Answer}}</h4>
-<h4>DIfficulty:-{{.Difficulty}}</h4>
-<hr>
+<table>
 
-
-
-
-
+<tr>
+    <th>Student Name</th>
+    <th>Quiz Name</th>
+    <th>Score</th>
+</tr>
+{{range .data}}
+<tr>
+    <td>{{.Name}}</td>
+    <td>{{.QuizName}}</td>
+    <td>{{.TotalScore}}</td>
+</tr>
 
 {{end}}
-</body>
-</html>
+
+</table>
+</body> 

@@ -46,6 +46,7 @@ func Run() {
 		Teacher.POST("/addstudent", controllers.PostStudentController)
 		Teacher.GET("/listofquiz", controllers.GetListOfQuizController)
 		Teacher.GET("/quiz", controllers.GetQuizController)
+		Teacher.GET("/showstudentresult",controllers.GetStudentResultController)
 	}
 	Student := r.Group("/student")
 	{
