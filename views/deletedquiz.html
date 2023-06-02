@@ -40,21 +40,21 @@
 </head>
 <body>
     <ul>
-        <li><a class="active" href="http://localhost:8080/teacher/teacherpanel">Home</a></li>
+        <li><a class="active" href="http://localhost:8080/admin/adminpanel">Home</a></li>
        
-        <li><a href="http://localhost:8080/teacher/teacherpanel">Back</a></li>
+        <li><a href="http://localhost:8080/admin/adminpanel">Back</a></li>
         <li><a href="http://localhost:8080/authentication/Logout">Logout</a></li>
     </ul>
-    <h1>List of quizzes</h1>
+    <h1>Select quiz which you want to delete</h1><br><br>
 
 
-    {{range.quiz}}
+    {{range.quizzes}}
     
-    <input type="button" value="{{.QuizName}}" id="{{.QuizName}}" class="btn-outline-primary" style="margin-left: 10px;">
+    <input type="button" value="{{.QuizName}}X" id="{{.QuizName}}" class="btn-outline-primary" style="margin-left: 10px;">
 
-    {{end}}
+    {{end}}<br><br>
 
-
+    <h1>{{.msg}}</h1>
 
 
 
@@ -70,6 +70,7 @@
     
         
        $(document).on('click','input[id]',function(e){
+        e.preventDefault()
         var quizname=$(this).attr('id');
         console.log(quizname)
         console.log(typeof(quizname))
@@ -79,7 +80,7 @@
        });
        function myfunction(s){
         console.log(s)
-        var urlLink="http://localhost:8080/teacher/quiz?quizname="+s
+        var urlLink="http://localhost:8080/admin/quiz?quizname="+s
         window.open(urlLink)
 
     }
