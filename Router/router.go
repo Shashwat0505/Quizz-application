@@ -17,7 +17,7 @@ func Run() {
 	store := cookie.NewStore([]byte("secret"))
 	r.Use(sessions.Sessions("mysession", store))
 	r.LoadHTMLGlob("views/*")
-
+	r.GET("/",ClearSessionHandler,controllers.RegistrationController)
 	Authentication := r.Group("/authentication", ClearSessionHandler)
 	{
 		Authentication.GET("/Registration", controllers.RegistrationController)
