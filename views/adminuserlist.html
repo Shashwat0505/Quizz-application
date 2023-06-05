@@ -16,7 +16,7 @@
             margin: 0%;
             padding: 0;
             overflow: hidden;
-            background-color:#57A8CC;;
+            background-color: #57A8CC;;
         }
 
         li {
@@ -40,17 +40,17 @@
 </head>
 <body>
     <ul>
-        <li><a class="active" href="http://localhost:8080/teacher/teacherpanel">Home</a></li>
+        <li><a class="active" href="http://localhost:8080/admin/adminpanel">Home</a></li>
        
-        <li><a href="http://localhost:8080/teacher/teacherpanel">Back</a></li>
+        <li><a href="http://localhost:8080/admin/adminpanel">Back</a></li>
         <li><a href="http://localhost:8080/authentication/Logout">Logout</a></li>
     </ul>
-    <h1 style="color: rgb(6, 6, 133);">List of quizzes</h1>
+    <h1>List of quizzes</h1>
 
 
-    {{range.quiz}}
+    {{range.users}}
     
-    <input type="button" value="{{.QuizName}}" id="{{.QuizName}}" class="btn-outline-primary" style="margin-left: 10px;">
+    <input type="button" value="{{.Name}}" id="{{.Name}}" class="btn-outline-primary">
 
     {{end}}
 
@@ -70,16 +70,16 @@
     
         
        $(document).on('click','input[id]',function(e){
-        var quizname=$(this).attr('id');
-        console.log(quizname)
-        console.log(typeof(quizname))
+        var username=$(this).attr('id');
+        console.log(username)
+        console.log(typeof(username))
         
-        myfunction(quizname)
+        myfunction(name)
 
        });
        function myfunction(s){
         console.log(s)
-        var urlLink="http://localhost:8080/teacher/quiz?quizname="+s
+        var urlLink="http://localhost:8080/admin/user?username="+s
         window.open(urlLink)
 
     }

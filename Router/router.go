@@ -36,6 +36,8 @@ func Run() {
 		Admin.POST("/addadmin", controllers.CreateAdminController)
 		Admin.GET("/showquizzes",controllers.GetAdminQuizController)
 		Admin.GET("/quiz",controllers.RemoveQuizController)
+		Admin.GET("/showusers",controllers.GetUserAdminController)
+		Admin.GET("/user",controllers.RemoveUserController)
 		
 
 	}

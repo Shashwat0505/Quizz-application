@@ -99,7 +99,7 @@ $(document).ready(function(){
   margin: 0%;
   padding: 0;
   overflow: hidden;
-  background-color: #321bb8;
+  background-color:#57A8CC;;
 }
 
 li {
@@ -137,13 +137,15 @@ li a:hover {
 <hr>
 {{range .questions}}
 
-<h3 class="{{.Difficulty}} hide question">question:-{{.Question}}</h1>
-<h4 class="{{.Difficulty}} hide question">(A){{.OptionA}}</h4>
-<h4 class="{{.Difficulty}} hide question">(B){{.OptionB}}</h4>
-<h4 class="{{.Difficulty}} hide question">(C){{.OptionC}}</h4>
-<h4 class="{{.Difficulty}} hide question">(D){{.OptionD}}</h4>
-<h4 class="{{.Difficulty}} hide question">Answer:-{{.Answer}}</h4>
-<h4 class="{{.Difficulty}} hide question">DIfficulty:-{{.Difficulty}}</h4>
+<h3 class="{{.Difficulty}} hide question {{.Question}}">question:-{{.Question}}</h1>
+<h4 class="{{.Difficulty}} hide question {{.Question}}">(A){{.OptionA}}</h4>
+<h4 class="{{.Difficulty}} hide question {{.Question}}">(B){{.OptionB}}</h4>
+<h4 class="{{.Difficulty}} hide question {{.Question}}">(C){{.OptionC}}</h4>
+<h4 class="{{.Difficulty}} hide question {{.Question}}">(D){{.OptionD}}</h4>
+<h4 class="{{.Difficulty}} hide question {{.Question}}">Answer:-{{.Answer}}</h4>
+<h4 class="{{.Difficulty}} hide question {{.Question}}">DIfficulty:-{{.Difficulty}}</h4>
+
+
 
 <hr id="lasthr">
 {{end}}
@@ -203,7 +205,7 @@ li a:hover {
 
         })
         }
-
+       
         
         </script>
 
