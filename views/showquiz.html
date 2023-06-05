@@ -137,20 +137,23 @@ li a:hover {
 <hr>
 {{range .questions}}
 
-<h3 class="{{.Difficulty}} hide question {{.Question}}">question:-{{.Question}}</h1>
-<h4 class="{{.Difficulty}} hide question {{.Question}}">(A){{.OptionA}}</h4>
-<h4 class="{{.Difficulty}} hide question {{.Question}}">(B){{.OptionB}}</h4>
-<h4 class="{{.Difficulty}} hide question {{.Question}}">(C){{.OptionC}}</h4>
-<h4 class="{{.Difficulty}} hide question {{.Question}}">(D){{.OptionD}}</h4>
-<h4 class="{{.Difficulty}} hide question {{.Question}}">Answer:-{{.Answer}}</h4>
-<h4 class="{{.Difficulty}} hide question {{.Question}}">DIfficulty:-{{.Difficulty}}</h4>
+<h3 class="{{.Difficulty}} hide question {{.Question}} questionname" id="question">{{.Question}}</h1>
+    
+<h4 class="{{.Difficulty}} hide question {{.Question}} optiona" id="optiona">{{.OptionA}}</h4>
+<h4 class="{{.Difficulty}} hide question {{.Question}} optionb" id="optionb">{{.OptionB}}</h4>
+<h4 class="{{.Difficulty}} hide question {{.Question}} optionc" id="optionc">{{.OptionC}}</h4>
+<h4 class="{{.Difficulty}} hide question {{.Question}} optiond" id="optiond">{{.OptionD}}</h4>
+<h4 class="{{.Difficulty}} hide question {{.Question}} answer" id="answer">{{.Answer}}</h4>
+<h4 class="{{.Difficulty}} hide question {{.Question}} difficulty" id="difficulty">{{.Difficulty}}</h4>
 
-
+<button id="{{.Question}}"  class="{{.Difficulty}} hide question btn-outline-primary"onclick="AddQuesion(this)">Add Question</button>
 
 <hr id="lasthr">
 {{end}}
       <hr id="lasthr">
-    
+    <label for="newquiz">Enter the name of quiz:-</label><br>
+    <input type="text" name="newquiz" id="newquiz"><br><br>
+      <button onclick="ShowAddedQuestions()" class="btn-outline-success">Add questions to this quiz</button>
 
 <!-- <a href="http://localhost:8080/teacher/createquizz">Create Quizz</a><br><br>
 <a href="http://localhost:8080/teacher/addstudent">Add students for participating in Quiz</a><br><br>
@@ -162,7 +165,7 @@ li a:hover {
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     
@@ -205,7 +208,68 @@ li a:hover {
 
         })
         }
+        let QuesionsArr=[]
+        function AddQuesion(e){
+            temp=e.id
+            const Questions=document.getElementsByClassName(temp)
+            let Ques = [].map.call(Questions, function (e) {
+                return e
+            });
+           console.log(Ques)
+            var object={}
+            Ques.forEach(question=>{
+                console.log("loop called")
+                if(question.classList.contains("questionname")){
+                    object={}
+                    object["question"]=question.innerHTML
+                }
+                else if(question.classList.contains("optiona")){
+                    object["optiona"]=question.innerHTML
+                }
+                else if(question.classList.contains("optionb")){
+                    object["optionb"]=question.innerHTML
+                }
+                else if(question.classList.contains("optionc")){
+                    object["optionc"]=question.innerHTML
+                }
+                else if(question.classList.contains("optiond")){
+                    object["optiond"]=question.innerHTML
+                }
+                else if(question.classList.contains("answer")){
+                    object["answer"]=question.innerHTML
+                }
+                else if(question.classList.contains("difficulty")){
+                    object["difficulty"]=question.innerHTML
+                    console.log(object)
+                    QuesionsArr.push(object)
+                }
+
+            })
+            console.log(QuesionsArr)
+            alert("question added successfully!!!!")
+           
+            
+        }
        
+        function ShowAddedQuestions(){
+            $(document).ready(function(){
+                console.log("questions addedd in")
+                $.ajax({
+                url: "http://localhost:8080/teacher/updatequizz?quizname=" + $("#newquiz").val(),
+                type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(QuesionsArr)
+
+            });
+            alert("quiz created successfully!!!")
+            window.open("http://localhost:8080/teacher/teacherpanel")
+
+            })
+             
+
+        
+        }
         
         </script>
 

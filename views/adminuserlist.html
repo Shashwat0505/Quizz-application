@@ -45,12 +45,12 @@
         <li><a href="http://localhost:8080/admin/adminpanel">Back</a></li>
         <li><a href="http://localhost:8080/authentication/Logout">Logout</a></li>
     </ul>
-    <h1>List of quizzes</h1>
+    <h1>List of Users</h1>
 
 
     {{range.users}}
     
-    <input type="button" value="{{.Name}}" id="{{.Name}}" class="btn-outline-primary">
+    <input type="button" value="{{.Name}} x" id="{{.Name}}" class="btn-outline-primary">
 
     {{end}}
 
