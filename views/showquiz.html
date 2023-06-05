@@ -136,15 +136,22 @@ li a:hover {
       <h1>Quiz Name:-{{.name}}</h1>
 <hr>
 {{range .questions}}
+<label for="question" class="{{.Difficulty}} hide question">Question:-</label>
 
-<h3 class="{{.Difficulty}} hide question {{.Question}} questionname" id="question">{{.Question}}</h1>
+<h5 class="{{.Difficulty}} hide question {{.Question}} questionname" id="question">{{.Question}}</h5>
+<label for="optiona" class="{{.Difficulty}} hide question">(A)</label>
     
-<h4 class="{{.Difficulty}} hide question {{.Question}} optiona" id="optiona">{{.OptionA}}</h4>
-<h4 class="{{.Difficulty}} hide question {{.Question}} optionb" id="optionb">{{.OptionB}}</h4>
-<h4 class="{{.Difficulty}} hide question {{.Question}} optionc" id="optionc">{{.OptionC}}</h4>
-<h4 class="{{.Difficulty}} hide question {{.Question}} optiond" id="optiond">{{.OptionD}}</h4>
-<h4 class="{{.Difficulty}} hide question {{.Question}} answer" id="answer">{{.Answer}}</h4>
-<h4 class="{{.Difficulty}} hide question {{.Question}} difficulty" id="difficulty">{{.Difficulty}}</h4>
+<h6 class="{{.Difficulty}} hide question {{.Question}} optiona" id="optiona">{{.OptionA}}</h6>
+<label for="optionb" class="{{.Difficulty}} hide question">(B)</label>
+<h6 class="{{.Difficulty}} hide question {{.Question}} optionb" id="optionb">{{.OptionB}}</h6>
+<label for="optionc" class="{{.Difficulty}} hide question">(C)</label>
+<h6 class="{{.Difficulty}} hide question {{.Question}} optionc" id="optionc">{{.OptionC}}</h6>
+<label for="optiond" class="{{.Difficulty}} hide question">(D)</label>
+<h6 class="{{.Difficulty}} hide question {{.Question}} optiond" id="optiond">{{.OptionD}}</h6>
+<label for="answer" class="{{.Difficulty}} hide question">Ans:-</label>
+<h6 class="{{.Difficulty}} hide question {{.Question}} answer" id="answer">{{.Answer}}</h6>
+<label for="difficulty" class="{{.Difficulty}} hide question">Difficulty:-</label>
+<h6 class="{{.Difficulty}} hide question {{.Question}} difficulty" id="difficulty">{{.Difficulty}}</h6>
 
 <button id="{{.Question}}"  class="{{.Difficulty}} hide question btn-outline-primary"onclick="AddQuesion(this)">Add Question</button>
 
