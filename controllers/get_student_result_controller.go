@@ -19,7 +19,7 @@ func GetStudentResultController(c *gin.Context) {
 	}
 	var t1 []temp
 
-	dbconnection.DB.Raw("select users.name,quiz_students.quiz_name,quiz_students.total_score from users inner join quiz_students on users.id=quiz_students.student_id where users.id in(select student_id from teacher_students where teacher_students.teacher_id=?)", teacherID).Scan(&t1)
+	dbconnection.DB.Raw("select users.name,quiz_students.quiz_name,quiz_students.total_score from users left join quiz_students on users.id=quiz_students.student_id where users.id in(select student_id from teacher_students where teacher_students.teacher_id=?)", teacherID).Scan(&t1)
 
 	fmt.Println(t1)
 	c.HTML(200, "show_student_result.html", gin.H{

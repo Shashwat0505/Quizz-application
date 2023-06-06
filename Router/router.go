@@ -61,6 +61,7 @@ func Run() {
 		Student.GET("/quiz-data", controllers.GetStudentQuizDataController)
 		Student.POST("/submit",controllers.SubmitQuizController)
 		Student.GET("/resultdashboard",controllers.ResultDashboardController)
+		Student.GET("/quizresult",controllers.ShowDetailedResultController)
 	}
 	// CORS for https://foo.com and https://github.com origins, allowing:
 	// - PUT and PATCH methods

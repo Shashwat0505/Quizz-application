@@ -54,6 +54,6 @@ type Result struct{
 	Question string `json:"question"`
 	Answer string `json:"answer"`
 	SelectedAnswer string `json:"selected"`
-	status string 	`json:"status"`
+	Status string 	`json:"status"`
 
 }
