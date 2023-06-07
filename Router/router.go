@@ -38,6 +38,7 @@ func Run() {
 		Admin.GET("/quiz",controllers.RemoveQuizController)
 		Admin.GET("/showusers",controllers.GetUserAdminController)
 		Admin.GET("/user",controllers.RemoveUserController)
+		Admin.GET("/userprofile",controllers.GetUserProfileController)
 		
 
 	}

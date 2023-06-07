@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"fmt"
+	"net/http"
 	"quizz-application/dbconnection"
 	"quizz-application/models"
 
@@ -19,9 +20,11 @@ func RemoveUserController(c *gin.Context) {
 
 	dbconnection.DB.Model(&models.User{}).Find(&users)
 
-	c.HTML(200, "deleteduser.html", gin.H{
-		"users": users,
-		"msg":     "user deleted successfully!!!!",
-	})
+	// c.HTML(200, "deleteduser.html", gin.H{
+	// 	"users": users,
+	// 	"msg":     "user deleted successfully!!!!",
+	// })
 
+
+	c.Redirect(http.StatusTemporaryRedirect,"/admin/userprofile")
 }
