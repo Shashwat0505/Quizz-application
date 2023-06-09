@@ -32,7 +32,7 @@ func PostLoginDataController(c *gin.Context) {
 		})
 		return
 	}
-	if user.Password == "admin@123" && newuser.RoleName == "admin" {
+	if  newuser.RoleName == "admin" {
 		session.Set("userID",newuser.ID)
 		session.Save()
 		c.HTML(200, "adminpanel.html", gin.H{

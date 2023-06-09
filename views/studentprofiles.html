@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <title>Quizzing Application</title>
+    <title>Quizzing</title>
     <style>
         table,
         tr,
@@ -45,6 +45,7 @@
             overflow: hidden;
             background-color: #57A8CC;
             ;
+            
         }
 
         li {
@@ -72,31 +73,30 @@
 
 <body>
     <ul>
-        <li><a class="active" href="http://localhost:8080/student/studentpanel">Home</a></li>
+        <li><a class="active" href="http://localhost:8080/teacher/teacherpanel">Home</a></li>
         
-        <li><a href="http://localhost:8080/admin/userprofile">Show Profile</a></li>
-        <li><a href="http://localhost:8080/admin/adminpanel">Back</a></li>
+       
+        <li><a href="http://localhost:8080/teacher/teacherpanel">Back</a></li>
         <li><a href="http://localhost:8080/authentication/Logout">Logout</a></li>
     </ul>
 
     <div class="d-flex  flex-wrap cardcontainer">
-        {{range .student}}
+        {{range .studentprofiles}}
 
         <div class="card" style="width: 18rem;border: 1px solid #1f22c9;">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item" style="border: 1px solid #1f22c9;">Name:-{{.Name}}</li>
-                <li class="list-group-item" style="border: 1px solid #1f22c9;">Email:-{{.Email}}</li>
-                <li class="list-group-item" style="border: 1px solid #1f22c9;">Rolename:-{{.RoleName}}</li>
-                <li class="list-group-item" title="{{.Quizzes}}" style="border: 1px solid #1f22c9;white-space: nowrap;overflow: hidden; text-overflow: ellipsis;">Quizzes:-{{.Quizzes}}</li>
-                <li class="list-group-item" style="border: 1px solid #1f22c9;">Teacher:-{{.Teacher}}</li>
-                <li class="list-group-item" style="border: 1px solid #1f22c9;"><button class="btn btn-primary" id="{{.Name}}">Delete</button></li>
+            <ul class="list-group list-group-flush" >
+                <li class="list-group-item" style="border: 1px solid #1f22c9;">Name:-{{.StudentName}}</li>
+                <li class="list-group-item" style="border: 1px solid #1f22c9;">Quizzes Attended:-{{.QuizzesAttended}}</li>
+                <li class="list-group-item" style="border: 1px solid #1f22c9;">Quizzes Remaining:-{{.QuizzesRemaining}}</li>
+               
+                <li class="list-group-item" style="border: 1px solid #1f22c9;"><button class="btn btn-primary" id="{{.StudentName}}">Delete</button></li>
 
 
             </ul>
         </div>
         {{end}}
 
-        {{range .teacher}}
+        <!-- {{range .teacher}}
 
         <div class="card" style="width: 18rem; border: 1px solid #1f22c9;">
             <ul class="list-group list-group-flush">
@@ -113,7 +113,7 @@
             </ul>
         </div>
 
-        {{end}}
+        {{end}} -->
     </div>
 
     <!-- Optional JavaScript -->
@@ -153,7 +153,7 @@
     });
     function myfunction(s) {
         console.log(s)
-        var urlLink = "http://localhost:8080/admin/user?username=" + s
+        var urlLink = "http://localhost:8080/teacher/student?username=" + s
         window.open(urlLink)
 
     }

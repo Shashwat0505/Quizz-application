@@ -17,29 +17,28 @@ func Run() {
 	store := cookie.NewStore([]byte("secret"))
 	r.Use(sessions.Sessions("mysession", store))
 	r.LoadHTMLGlob("views/*")
-	r.GET("/",ClearSessionHandler,controllers.RegistrationController)
+	r.GET("/", ClearSessionHandler, controllers.RegistrationController)
 	Authentication := r.Group("/authentication", ClearSessionHandler)
 	{
 		Authentication.GET("/Registration", controllers.RegistrationController)
 		Authentication.POST("/PostRegistration", controllers.PostRegistrationDataController)
 		Authentication.GET("/Login", controllers.LoginController)
 		Authentication.POST("/Login", controllers.PostLoginDataController)
-		Authentication.GET("/Logout",controllers.LogOutController)
+		Authentication.GET("/Logout", controllers.LogOutController)
 	}
 
-	Admin := r.Group("/admin",SessionHandler)
+	Admin := r.Group("/admin", SessionHandler)
 	{
 		Admin.GET("/adminpanel", controllers.AdminpanelController)
 		Admin.GET("/addteacher", controllers.AddTeacherController)
 		Admin.GET("/addadmin", controllers.AddAdminController)
 		Admin.POST("/addteacher", controllers.CreateTeacherController)
 		Admin.POST("/addadmin", controllers.CreateAdminController)
-		Admin.GET("/showquizzes",controllers.GetAdminQuizController)
-		Admin.GET("/quiz",controllers.RemoveQuizController)
-		Admin.GET("/showusers",controllers.GetUserAdminController)
-		Admin.GET("/user",controllers.RemoveUserController)
-		Admin.GET("/userprofile",controllers.GetUserProfileController)
-		
+		Admin.GET("/showquizzes", controllers.GetAdminQuizController)
+		Admin.GET("/quiz", controllers.RemoveQuizController)
+		Admin.GET("/showusers", controllers.GetUserAdminController)
+		Admin.GET("/user", controllers.RemoveUserController)
+		Admin.GET("/userprofile", controllers.GetUserProfileController)
 
 	}
 
@@ -52,17 +51,19 @@ func Run() {
 		Teacher.POST("/addstudent", controllers.PostStudentController)
 		Teacher.GET("/listofquiz", controllers.GetListOfQuizController)
 		Teacher.GET("/quiz", controllers.GetQuizController)
-		Teacher.GET("/showstudentresult",controllers.GetStudentResultController)
-		Teacher.POST("/updatequizz",controllers.UpdateQuizController)
+		Teacher.GET("/showstudentresult", controllers.GetStudentResultController)
+		Teacher.POST("/updatequizz", controllers.UpdateQuizController)
+		Teacher.GET("/studentprofiles", controllers.ShowStudentProfileController)
+		Teacher.GET("/student", controllers.RemoveStudentController)
 	}
-	Student := r.Group("/student",SessionHandler)
+	Student := r.Group("/student", SessionHandler)
 	{
 		Student.GET("/studentpanel", controllers.StudentPanelController)
 		Student.GET("/quiz", controllers.GetStudentQuizController)
 		Student.GET("/quiz-data", controllers.GetStudentQuizDataController)
-		Student.POST("/submit",controllers.SubmitQuizController)
-		Student.GET("/resultdashboard",controllers.ResultDashboardController)
-		Student.GET("/quizresult",controllers.ShowDetailedResultController)
+		Student.POST("/submit", controllers.SubmitQuizController)
+		Student.GET("/resultdashboard", controllers.ResultDashboardController)
+		Student.GET("/quizresult", controllers.ShowDetailedResultController)
 	}
 	// CORS for https://foo.com and https://github.com origins, allowing:
 	// - PUT and PATCH methods
@@ -71,11 +72,10 @@ func Run() {
 	// - Preflight requests cached for 12 hours
 	r.Use(cors.New(cors.Config{
 		//AllowOrigins:     []string{"*"},
-		AllowAllOrigins:        true,
-		AllowMethods:           []string{"PATCH", "GET", "POST", "OPTIONS"},
-		AllowHeaders:           []string{"Origin", "Authorization", "Access-Control-Allow-Origin", "Access-Control-Allow-Headers", "Content-Type"},
-		ExposeHeaders:          []string{"Content-Length", "Access-Control-Allow-Origin", "Access-Control-Allow-Headers", "Content-Type"},
-		
+		AllowAllOrigins: true,
+		AllowMethods:    []string{"PATCH", "GET", "POST", "OPTIONS"},
+		AllowHeaders:    []string{"Origin", "Authorization", "Access-Control-Allow-Origin", "Access-Control-Allow-Headers", "Content-Type"},
+		ExposeHeaders:   []string{"Content-Length", "Access-Control-Allow-Origin", "Access-Control-Allow-Headers", "Content-Type"},
 	}))
 	// r.Use(cors.Default())
 	// r.Use(cors.Middleware(cors.Config{

@@ -22,6 +22,7 @@ func PostQuizController(c *gin.Context) {
 		c.Redirect(401,"/authentication/login"	)
 	}
 	quizname :=c.Query("quizname")
+	
 	fmt.Println(quizname)
 	fmt.Println("post request called")
 	// fmt.Println(c.Request.Body)

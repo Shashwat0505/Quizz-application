@@ -128,13 +128,17 @@ li a:hover {
         <li><a href="http://localhost:8080/teacher/listofquiz">Back</a></li>
         <li><a href="http://localhost:8080/authentication/Logout">Logout</a></li>
       </ul>
-      <label for="categories">Click on category:-</label>
+      <div class="container border">
+      <label for="categories"><h3><u>Click on category:-   </u></h3></label>
       <input type="radio" name="categories" value="easy" id="easy" onclick="changestate()">easy
       <input type="radio" name="categories" value="medium" id="medium" onclick="changestate()">medium
-      <input type="radio" name="categories" value="hard" id="hard" onclick="changestate()">hard
-
-      <h1>Quiz Name:-{{.name}}</h1>
+      <input type="radio" name="categories" value="hard" id="hard" onclick="changestate()">hard<br><br>
+    <button class="btn btn-primary" onclick="ShowAllQuestions()">Show all questions</button>
+     
+    </div>
 <hr>
+<div class="container border">
+    <h1><u>Quiz Name:-{{.name}}</u></h1>    
 {{range .questions}}
 <label for="question" class="{{.Difficulty}} hide question">Question:-</label>
 
@@ -157,8 +161,10 @@ li a:hover {
 
 <hr id="lasthr">
 {{end}}
+</div>
       <hr id="lasthr">
-    <label for="newquiz">Select the name of quiz:-</label><br>
+      <div class="container border">
+    <label for="newquiz"><h3>Select the name of quiz:-</h3></label><br>
    
     <select name="quizzes" id="quizzes">
         {{range .quizzes}}
@@ -167,7 +173,8 @@ li a:hover {
     </select>
    
    
-      <button onclick="ShowAddedQuestions()" class="btn btn-primary">Add questions to this quiz</button>
+      <button onclick="ShowAddedQuestions()" class="btn btn-primary">Add questions to  quiz</button>
+    </div>
 
 <!-- <a href="http://localhost:8080/teacher/createquizz">Create Quizz</a><br><br>
 <a href="http://localhost:8080/teacher/addstudent">Add students for participating in Quiz</a><br><br>
@@ -221,6 +228,12 @@ li a:hover {
             }
 
         })
+        }
+        function ShowAllQuestions(){
+            const questions=document.querySelectorAll(".question")
+            questions.forEach(element=>{
+                element.classList.remove('hide')
+            })
         }
         let QuesionsArr=[]
         function AddQuesion(e){

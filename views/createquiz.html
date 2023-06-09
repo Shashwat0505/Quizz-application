@@ -51,7 +51,7 @@
 
         <div class="header">
             <label for="quizname">Enter the name of quiz:-</label><br>
-            <input type="text" name="quizname" id="input_quiz_name" class="question">
+            <input type="text" name="quizname" id="input_quiz_name" class="question" required>
         </div>
         <hr>
         <div class="question">
@@ -59,35 +59,35 @@
             <tr>
                 
         <td><label for="question">Question</label></td>
-        <td><input type="text" name="question" id="question" class="question"></td>
+        <td><input type="text" name="question" id="question" class="question" required></td>
         </tr>
         <tr>
         <td><label for="optiona">A</label><input type ="radio" name="option" id="OptionA0" onclick="AddAnswer('OptionA0','answer0')"></td>
        
-        <td><input type="text" name="OptionA" id="optiona" class="question OptionA0"></td>
+        <td><input type="text" name="OptionA" id="optiona" class="question OptionA0" required></td>
         </tr>
         <tr>
         <td><label for="optionb">B</label><input type ="radio" name="option" id="OptionB0" onclick="AddAnswer('OptionB0','answer0')" ></td>
        
-        <td><input type="text" name="OptionB" id="optionb" class="question OptionB0" onclick="AddAnswer(this)"></td>
+        <td><input type="text" name="OptionB" id="optionb" class="question OptionB0" onclick="AddAnswer(this)" required></td>
         </tr>
         <tr>
-        <td><label for="optionc">C</label><input type ="radio" name="option" id="OptionC0" onclick="AddAnswer('OptionC0','answer0')"></td>
+        <td><label for="optionc">C</label><input type ="radio" name="option" id="OptionC0" onclick="AddAnswer('OptionC0','answer0')" ></td>
       
-        <td><input type="text" name="OptionC" id="optionc" class="question OptionC0"></td>
+        <td><input type="text" name="OptionC" id="optionc" class="question OptionC0" required></td>
         </tr>
         <tr>
         <td><label for="optiond">D</label><input type ="radio" name="option" id="OptionD0" onclick="AddAnswer('OptionD0','answer0')"></td>
     
-        <td><input type="text" name="OptionD" id="optiond" class="question OptionD0"></td>
+        <td><input type="text" name="OptionD" id="optiond" class="question OptionD0" required></td>
         </tr>
         <tr>
         <td><label for="answer">Answer</label></td>
-        <td><input type="text" name="answer" id="answer" class="question answer0"></td>
+        <td><input type="text" name="answer" id="answer" class="question answer0" required></td>
         </tr>
         <tr>
         <td><label for="difficulty">Set difficulty of question:-</label></td>
-        <td><input type ="radio" name="difficulty0" value="easy" class="difficulty question" id="difficulty"><label for="easy">easy</label><input type ="radio" name="difficulty0" value="medium" class="difficulty question" id="difficulty"><label for="medium">medium</label><input type ="radio" name="difficulty0" value="hard" class="difficulty question" id="difficulty"><label for="hard">hard</label></td>
+        <td><input type ="radio" name="difficulty0" value="easy" class="difficulty question" id="difficulty" selected><label for="easy">easy</label><input type ="radio" name="difficulty0" value="medium" class="difficulty question" id="difficulty" ><label for="medium">medium</label><input type ="radio" name="difficulty0" value="hard" class="difficulty question" id="difficulty"><label for="hard">hard</label></td>
         </tr>
         </table>
     </div>
@@ -99,6 +99,7 @@
         <button class="add-btn" type="button">Add Questions</button>
         <input type="submit" value="submit">
         <hr>
+        {{.error}}
 
     </form>
 
@@ -116,35 +117,35 @@
             <tr>
                 
         <td><label for="question">Question</label></td>
-        <td><input type="text" name="question" id="question" class="question"></td>
+        <td><input type="text" name="question" id="question" class="question" required></td>
         </tr>
         <tr>
         <td><label for="optiona">A</label><input type ="radio" name="option`+i+`" id="OptionA`+i+`"onclick="AddAnswer('OptionA`+i+`','answer`+i+`')"></td>
        
-        <td><input type="text" name="OptionA" id="optiona" class="question OptionA`+i+`"></td>
+        <td><input type="text" name="OptionA" id="optiona" class="question OptionA`+i+`" required></td>
         </tr>
         <tr>
-        <td><label for="optionb">B</label><input type ="radio" name="option`+i+`" id="OptionB`+i+`"onclick="AddAnswer('OptionB`+i+`','answer`+i+`')"></td>
+        <td><label for="optionb">B</label><input type ="radio" name="option`+i+`" id="OptionB`+i+`"onclick="AddAnswer('OptionB`+i+`','answer`+i+`')" ></td>
        
-        <td><input type="text" name="OptionB" id="optionb" class="question OptionB`+i+`"></td>
+        <td><input type="text" name="OptionB" id="optionb" class="question OptionB`+i+`" required></td>
         </tr>
         <tr>
         <td><label for="optionc">C</label><input type ="radio" name="option`+i+`" id="OptionC`+i+`" onclick="AddAnswer('OptionC`+i+`','answer`+i+`')"></td>
       
-        <td><input type="text" name="OptionC" id="optionc" class="question OptionC`+i+`"></td>
+        <td><input type="text" name="OptionC" id="optionc" class="question OptionC`+i+`" required></td>
         </tr>
         <tr>
         <td><label for="optiond">D</label><input type ="radio" name="option`+i+`" id="OptionD`+i+`"onclick="AddAnswer('OptionD`+i+`','answer`+i+`')"></td>
     
-        <td><input type="text" name="OptionD" id="optiond" class="question OptionD`+i+`"></td>
+        <td><input type="text" name="OptionD" id="optiond" class="question OptionD`+i+`" required></td>
         </tr>
         <tr>
         <td><label for="answer">Answer</label></td>
-        <td><input type="text" name="answer" id="answer" class="question answer`+i+`"></td>
+        <td><input type="text" name="answer" id="answer" class="question answer`+i+`" required></td>
         </tr>
         <tr>
         <td><label for="difficulty">Set difficulty of question:-</label></td>
-        <td><input type ="radio" name="difficulty`+i+`" value="easy" class="difficulty question" id="difficulty"><label for="easy">easy</label><input type ="radio" name="difficulty`+i+`" value="medium" class="difficulty question" id="difficulty"><label for="medium">medium</label><input type ="radio" name="difficulty`+i+`" value="hard" class="difficulty question" id="difficulty"><label for="hard">hard</label></td>
+        <td><input type ="radio" name="difficulty`+i+`" value="easy" class="difficulty question" id="difficulty" selected><label for="easy">easy</label><input type ="radio" name="difficulty`+i+`" value="medium" class="difficulty question" id="difficulty"><label for="medium">medium</label><input type ="radio" name="difficulty`+i+`" value="hard" class="difficulty question" id="difficulty"><label for="hard">hard</label></td>
         </tr>
         </table>
     </div>

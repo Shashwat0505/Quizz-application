@@ -221,7 +221,7 @@ table,th,td{
         })
         QuizObject["quizname"]=quizname
         QuizObject["result"]=QuestionObjArr
-        QuizObject["total_score"]=counter.toString();
+        QuizObject["total_score"]=counter.toString()+"/"+QuestionObjArr.length.toString();
         
         console.log(QuestionObjArr)
         console.log(QuestionObj)
@@ -231,6 +231,7 @@ table,th,td{
         title.classList.remove("hide")
        
         resultscore.classList.remove("hide")
+       
         resultscore.innerText+=counter.toString()+"/"+QuestionObjArr.length.toString()
 
 
